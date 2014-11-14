@@ -58,13 +58,19 @@
             vm.treeData.push({ id : (newId++).toString(), parent : vm.newNode.parent, text : vm.newNode.text });
         };
 
-        this.setNodeType = function() {
+
+        vm. treeInstanceDemo = function() {
+            var selectedNode = vm.treeInstance.jstree(true).get_selected();
+            toaster.pop('info', 'Tree Instance Method Called',  selectedNode.length > 0 ? 'Selected node id is ' + selectedNode : 'None of the nodes are selected');
+        };
+
+        vm.setNodeType = function() {
             var item = _.findWhere(this.treeData, { id : this.selectedNode } );
             item.type = this.newType;
             toaster.pop('success', 'Node Type Changed', 'Changed the type of node ' + this.selectedNode);
         };
 
-        this.readyCB = function() {
+        vm.readyCB = function() {
             $timeout(function() {
                 vm.ignoreChanges = false;
                 toaster.pop('success', 'JS Tree Ready', 'Js Tree issued the ready event')
